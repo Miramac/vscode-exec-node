@@ -1,13 +1,10 @@
-# README
-## This is the README for your extension "vq-code-runner"
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
+# Node Exec
+### Execute your current file or your selected Javascript code with node.js.
 
-* Split the editor (`Cmd+\` on OSX or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on OSX or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (OSX) to see a list of Markdown snippets
+## Usage
+* To execute the current file or the selection press `F8`
+* To cancel a running process press `F9`
 
-### For more information
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+> Bugs and feedback: https://github.com/Miramac/vscode-exec-node/issues
 
 **Enjoy!**
