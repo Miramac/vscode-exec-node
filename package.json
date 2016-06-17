@@ -1,0 +1,41 @@
+{
+  "name": "vscode-exec-node",
+  "displayName": "Node Exec",
+  "description": "Execute your current file or your selected Javascript code with node.js.",
+  "version": "0.1.0",
+  "publisher": "miramac",
+  "engines": {
+    "vscode": "^1.0.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.miramac.node.exec"
+  ],
+  "main": "./extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.miramac.node.exec",
+        "title": "Execute Node.js"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.miramac.node.exec",
+        "key": "F8"
+      },
+      {
+        "command": "extension.miramac.node.cancel",
+        "key": "F9"
+      }
+    ]
+  },
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install"
+  },
+  "devDependencies": {
+    "vscode": "^0.11.13"
+  }
+}
