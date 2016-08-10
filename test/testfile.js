@@ -1,8 +1,8 @@
-
-function endlessCountt(i) {
+//Press F8 to start and F9 to cancel the process 
+function endlessCount(i) {
   console.log(i)
   setTimeout(()=> {
-      endlessCountt(++i)
+      endlessCount(++i)
   },1000)
 }
-endlessCountt(1)
+endlessCount(1)
