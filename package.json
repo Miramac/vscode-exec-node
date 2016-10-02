@@ -54,7 +54,7 @@
         },
         "miramac.node.clearOutput": {
           "type": "boolean",
-           "default": false,
+           "default": true,
            "description": "Clear output before execution"
         },
         "miramac.node.showInfo": {
