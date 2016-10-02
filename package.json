@@ -2,7 +2,7 @@
   "name": "vscode-exec-node",
   "displayName": "Node Exec",
   "description": "Execute your current file or your selection code with node.js.",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "publisher": "miramac",
   "license": "ISC",
   "engines": {
@@ -37,7 +37,43 @@
         "command": "extension.miramac.node.cancel",
         "key": "F9"
       }
-    ]
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Node Exec configurations",
+      "properties": {
+        "miramac.node.cwd": {
+          "type": ["string"],
+           "default": "${execPath}",
+           "description": "Set the working directory of the Node.js process"
+        },
+        "miramac.node.program": {
+          "type": ["string", "null"],
+           "default": null,
+           "description": "File to execute (comming soon)"
+        },
+        "miramac.node.clearOutput": {
+          "type": "boolean",
+           "default": false,
+           "description": "Clear output before execution"
+        },
+        "miramac.node.showInfo": {
+          "type": "boolean",
+           "default": true,
+           "description": "Show start and end info"
+        },
+        "miramac.node.showStdout": {
+          "type": "boolean",
+           "default": true,
+           "description": "Show console output"
+        },
+        "miramac.node.showStderr": {
+          "type": "boolean",
+           "default": true,
+           "description": "Show errors"
+        }
+      }
+    }
   },
   "scripts": {
     "postinstall": "node ./node_modules/vscode/bin/install"
