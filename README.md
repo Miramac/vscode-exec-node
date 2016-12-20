@@ -1,5 +1,5 @@
 # Node Exec
-### Execute your current file or your selection with node.js.
+### Execute the current file or your selected code with node.js.
 
 ## Usage
 * To execute the current file or the selection press `F8` or use the command `Execute Node.js`
