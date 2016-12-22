@@ -26,6 +26,13 @@ Show stdout and stderr
 }
 ````
 
+*Experimental Terminal mode*. If true, will use the integrated terminal to call the script.
+````json
+{
+  "miramac.node.terminalMode": true
+}
+````
+
 ## How it works
 The selected code or if nothing is selected, the active file, is written in a temporarily file (something like `node_<random-sring>.tmp`). You don't have to save the file for execution.
 This file will be executed by your installed version of node.js. Therefore `node` has to be in the PATH.
