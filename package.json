@@ -2,7 +2,7 @@
   "name": "vscode-exec-node",
   "displayName": "Node Exec",
   "description": "Execute the current file or your selected code with node.js.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "publisher": "miramac",
   "license": "ISC",
   "engines": {
@@ -76,6 +76,11 @@
           "type": "boolean",
            "default": false,
            "description": "*NEW* Use the integrated terminal"
+        },
+        "miramac.node.terminalCmd": {
+          "type": "string",
+           "default": "node",
+           "description": "Program used in terminal mode"
         }
       }
     }
