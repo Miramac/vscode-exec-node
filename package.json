@@ -81,6 +81,21 @@
           "type": "string",
            "default": "node",
            "description": "Program used in terminal mode"
+        },
+        "miramac.node.includeCode": {
+          "type": ["string", "null"],
+           "default": null,
+           "description": "Some code that is run with each time"
+        },
+        "miramac.node.executeFileOrSelection": {
+          "type": "string",
+           "default": "both",
+           "description": "Execute always the file ('file') only selected code ('selection') or both ('both')"
+        },
+        "miramac.node.outputWindowName": {
+          "type": "string",
+           "default": "Node.js",
+           "description": "name of the OutputChannel"
         }
       }
     }
