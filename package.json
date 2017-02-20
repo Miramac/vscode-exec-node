@@ -43,7 +43,7 @@
       "title": "Node Exec configurations",
       "properties": {
         "miramac.node.cwd": {
-          "type": ["string"],
+          "type": "string",
            "default": "${execPath}",
            "description": "Set the working directory of the Node.js process"
         },
@@ -75,7 +75,7 @@
         "miramac.node.terminalMode": {
           "type": "boolean",
            "default": false,
-           "description": "*NEW* Use the integrated terminal"
+           "description": "Use the integrated terminal"
         },
         "miramac.node.terminalCmd": {
           "type": "string",
@@ -85,7 +85,7 @@
         "miramac.node.includeCode": {
           "type": ["string", "null"],
            "default": null,
-           "description": "Some code that is run with each time"
+           "description": "Some code that is executed with each run"
         },
         "miramac.node.executeFileOrSelection": {
           "type": "string",
@@ -95,7 +95,12 @@
         "miramac.node.outputWindowName": {
           "type": "string",
            "default": "Node.js",
-           "description": "name of the OutputChannel"
+           "description": "Output-Channel Name"
+        },
+        "miramac.node.params": {
+          "type": "object",
+           "default": {},
+           "description": "Add execution parameter like environment variables"
         }
       }
     }

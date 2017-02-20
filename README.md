@@ -25,8 +25,18 @@ Show stdout and stderr
   "miramac.node.showStderr": true
 }
 ````
+Add parameters for execution. For example to set environment variables:
+````json
+{
+  "miramac.node.params": {
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }
+}
+````
 
-*Experimental Terminal mode*. If true, will use the integrated terminal to call the script.
+*Experimental Terminal mode*. If true, will use the integrated terminal to call the script. Not all options are supported!
 ````json
 {
   "miramac.node.terminalMode": true
