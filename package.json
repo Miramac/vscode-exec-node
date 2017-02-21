@@ -2,8 +2,12 @@
   "name": "vscode-exec-node",
   "displayName": "Node Exec",
   "description": "Execute the current file or your selected code with node.js.",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "publisher": "miramac",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Miramac/vscode-exec-node.git"
+  },
   "license": "ISC",
   "engines": {
     "vscode": "^1.0.0"
@@ -97,10 +101,15 @@
            "default": "Node.js",
            "description": "Output-Channel Name"
         },
-        "miramac.node.params": {
+        "miramac.node.env": {
           "type": "object",
            "default": {},
-           "description": "Add execution parameter like environment variables"
+           "description": "Add execution environment variables"
+        },
+        "miramac.node.args": {
+          "type": "array",
+           "default": [],
+           "description": "Add execution arguments"
         }
       }
     }
