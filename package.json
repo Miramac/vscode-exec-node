@@ -2,7 +2,7 @@
   "name": "vscode-exec-node",
   "displayName": "Node Exec",
   "description": "Execute the current file or your selected code with node.js.",
-  "version": "0.2.1",
+  "version": "0.2.8",
   "publisher": "miramac",
   "license": "ISC",
   "engines": {
