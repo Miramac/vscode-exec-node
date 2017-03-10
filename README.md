@@ -34,6 +34,16 @@ Show stdout and stderr
 }
 ````
 
+If `miramac.node.legacyMode` is `true` (default) the extention will not use new features and options. Because of some strange problems I can't reproduce, the extension remains in legacy mode. To use the following options simply set this option to `false`
+
+````json
+{
+  "miramac.node.legacyMode": false
+}
+````
+
+### The folloing options need to set the legacyMode off
+
 Set environment variables for execution:
 
 ````json
@@ -52,11 +62,19 @@ Add arguments for execution:
 }
 ````
 
-*Experimental Terminal mode*. If true, will use the integrated terminal to call the script. Not all options are supported!
+Change the node binary for execution
 
 ````json
 {
-  "miramac.node.terminalMode": true
+  "miramac.node.nodeBin": "/path/to/some/bin/node-7.0"
+}
+````
+
+Some code that is executed with each run
+
+````json
+{
+  "miramac.node.includeCode": "const DEBUG = true; const fs = require('fs'); "
 }
 ````
 
@@ -66,7 +84,7 @@ The selected code or if nothing is selected, the active file, is written in a te
 This file will be executed by your installed version of node.js. Therefore `node` has to be in the PATH.
 
 ```javascript
-require('child_process').spawn('node', [tmpFile])
+require('child_process').spawn('node', options,[tmpFile, args])
 ```
 
 Any data from `stdout` or `stderr` will be printed to an OutputChannel. Unfortunately console colors won't work.

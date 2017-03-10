@@ -110,6 +110,11 @@
           "type": ["array", "null"],
            "default": null,
            "description": "Add execution arguments"
+        },
+        "miramac.node.legacyMode": {
+          "type": "boolean",
+           "default": true,
+           "description": "If true, the extention will not use new features and options."
         }
       }
     }
