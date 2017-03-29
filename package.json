@@ -120,6 +120,7 @@
     }
   },
   "scripts": {
+    "publish": "vsce publish",
     "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "devDependencies": {
