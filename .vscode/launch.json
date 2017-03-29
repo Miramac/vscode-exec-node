@@ -7,7 +7,7 @@
             "type": "extensionHost",
             "request": "launch",
             "runtimeExecutable": "${execPath}",
-            "args": ["${workspaceRoot}\\test\\testfile.js", "--extensionDevelopmentPath=${workspaceRoot}" ],
+            "args": ["${workspaceRoot}\\test", "--extensionDevelopmentPath=${workspaceRoot}" ],
             "stopOnEntry": false
         },
         {
