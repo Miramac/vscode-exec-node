@@ -2,7 +2,7 @@
   "name": "vscode-exec-node",
   "displayName": "Node Exec",
   "description": "Execute the current file or your selected code with node.js.",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "publisher": "miramac",
   "repository": {
     "type": "git",
@@ -12,7 +12,7 @@
   "engines": {
     "vscode": "^1.0.0"
   },
-  "icon": "images/nodejs-new-pantone-black.png",
+  "icon": "images/node-exec-logo.png",
   "categories": [
     "Other"
   ],
