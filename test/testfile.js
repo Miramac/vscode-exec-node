@@ -9,6 +9,7 @@ function endlessCount (i) {
 }
 
 console.log(process.env.NODE_ENV)
+console.log(process.execArgv)
 console.log(process.argv)
 
 endlessCount(1)

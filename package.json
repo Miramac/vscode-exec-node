@@ -111,6 +111,11 @@
            "default": null,
            "description": "Add execution arguments"
         },
+        "miramac.node.options": {
+          "type": ["array", "null"],
+          "default": null,
+          "description": "Add execution options"
+        },
         "miramac.node.legacyMode": {
           "type": "boolean",
            "default": true,

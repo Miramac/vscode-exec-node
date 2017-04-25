@@ -62,6 +62,14 @@ Add arguments for execution:
 }
 ````
 
+Add options for execution:
+
+````json
+{
+  "miramac.node.options": ["--require", "babel-register"]
+}
+````
+
 Change the node binary for execution
 
 ````json

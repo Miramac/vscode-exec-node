@@ -3,5 +3,6 @@
   "miramac.node.env": {
     "NODE_ENV": "production"
   },
-  "miramac.node.legacyMode": false
+  "miramac.node.legacyMode": false,
+  "miramac.node.options": ["--no-warnings"]
 }
