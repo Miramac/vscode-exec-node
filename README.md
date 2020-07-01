@@ -1,6 +1,6 @@
-# Node Exec
+# Node.js Exec
 
-### Execute the current file or your selected code with node.js.
+### Run the current file or the code you selected with node.js.
 
 ## Usage
 
