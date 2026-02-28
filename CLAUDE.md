@@ -115,7 +115,8 @@ All settings are namespaced under `miramac.node` in VSCode settings:
 | `env` | object\|null | `null` | Extra environment variables for the process |
 | `args` | array\|null | `null` | Arguments passed to the script |
 | `options` | array\|null | `null` | Node.js CLI options (e.g., `--require`, `--no-warnings`) |
-| `legacyMode` | boolean | `true` | Load `activate.0.2.1.js` instead of `activate.js` |
+| `tsRunner` | string | `"ts-node"` | Command used to execute TypeScript files (`.ts`, `.tsx`); also accepts `tsx` |
+| `legacyMode` | boolean | `false` | Load `activate.0.2.1.js` instead of `activate.js` |
 
 > **Note:** `legacyMode` defaults to `true` for backward compatibility. New installations should set it to `false`.
 
@@ -181,6 +182,15 @@ This uses the VSCE tool to package and publish to the VSCode Marketplace. Ensure
 ---
 
 ## Making Changes
+
+### TypeScript Support
+
+When the active file has a `.ts` or `.tsx` extension, `lib/activate.js` automatically routes execution through `ts-node` (or the command set in `miramac.node.tsRunner`) instead of `node`. No user configuration is required for `.js` files.
+
+**To use TypeScript execution:**
+1. Install `ts-node` in your project or globally: `npm install -g ts-node typescript`
+2. Open any `.ts` file and press F8 — it runs via `ts-node` automatically
+3. To use `tsx` instead: set `"miramac.node.tsRunner": "tsx"` in VSCode settings
 
 ### Adding a New Configuration Option
 

@@ -1,7 +1,7 @@
 'use strict'
 let activate
 // this method is called when your extension is activated
-if (require('vscode').workspace.getConfiguration('miramac.node').legacyMode) {
+if (require('vscode').workspace.getConfiguration('miramac.node').get('legacyMode')) {
   activate = require('./lib/activate.0.2.1')
 } else {
   activate = require('./lib/activate')

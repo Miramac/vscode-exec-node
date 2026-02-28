@@ -22,7 +22,8 @@
     "node"
   ],
   "activationEvents": [
-    "onCommand:extension.miramac.node.exec"
+    "onCommand:extension.miramac.node.exec",
+    "onCommand:extension.miramac.node.cancel"
   ],
   "main": "./extension",
   "contributes": {
@@ -54,7 +55,7 @@
         "miramac.node.program": {
           "type": ["string", "null"],
            "default": null,
-           "description": "File to execute (comming soon)"
+           "description": "File to execute (coming soon)"
         },
         "miramac.node.clearOutput": {
           "type": "boolean",
@@ -116,10 +117,15 @@
           "default": null,
           "description": "Add execution options"
         },
+        "miramac.node.tsRunner": {
+          "type": "string",
+           "default": "ts-node",
+           "description": "Command used to execute TypeScript files (.ts, .tsx). Supported runners: ts-node, tsx"
+        },
         "miramac.node.legacyMode": {
           "type": "boolean",
-           "default": true,
-           "description": "If true, the extention will not use new features and options."
+           "default": false,
+           "description": "If true, the extension will not use new features and options."
         }
       }
     }
