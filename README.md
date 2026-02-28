@@ -1,101 +1,176 @@
 # Node.js Exec
 
-### Run the current file or the code you selected with node.js.
+**Run your current file or any selected code snippet directly with Node.js — right inside VS Code.**
 
-## Usage
+No terminal setup needed. Press `F8` and see the output immediately in the built-in output panel (or the integrated terminal if you prefer).
 
-* To execute the current file or the selection press `F8` or use the command `Execute Node.js`
-* To cancel a running process press `F9`
+---
 
-## Configuration
+## Quick Start
 
-Clear output before execution
+| Action | Keybinding | Command palette |
+|--------|-----------|-----------------|
+| Run file or selection | `F8` | `Execute Node.js` |
+| Cancel running process | `F9` | — |
 
-````json
+- **Unsaved file?** No problem — the extension runs whatever is in the editor buffer.
+- **Selection?** Highlight any lines and press `F8` — only the selected code runs.
+- **Nothing selected?** The entire file runs automatically.
+
+---
+
+## Features
+
+- Run the **whole file** or just a **selected snippet** with one keypress
+- Output streams **line-by-line** to the VS Code output panel (no buffering wait)
+- Supports **TypeScript** files (`.ts`, `.tsx`) via `ts-node` or `tsx` automatically
+- Optional **integrated terminal** mode for interactive scripts
+- Configurable **Node.js binary**, **environment variables**, **CLI arguments**, and **Node options**
+- Prepend **shared setup code** to every execution (e.g. imports, constants)
+- Automatic cleanup — no temp files left behind
+
+---
+
+## TypeScript Support
+
+Open any `.ts` or `.tsx` file and press `F8`. The extension automatically uses `ts-node` (or your configured runner) instead of `node`.
+
+**Requirements:** Install `ts-node` and `typescript`:
+
+```bash
+npm install -g ts-node typescript
+# or for tsx (faster, esbuild-based):
+npm install -g tsx
+```
+
+Switch runner via settings:
+
+```json
 {
-  "miramac.node.clearOutput": true
+  "miramac.node.tsRunner": "tsx"
 }
-````
+```
 
-Show start and end info
+---
 
-````json
+## Configuration Reference
+
+All settings live under the `miramac.node` namespace in your VS Code settings (`settings.json`).
+
+### Output
+
+| Setting | Type | Default | Description |
+|---------|------|---------|-------------|
+| `clearOutput` | boolean | `true` | Clear the output panel before each run |
+| `showInfo` | boolean | `true` | Show start time and execution duration |
+| `showStdout` | boolean | `true` | Display stdout in the output panel |
+| `showStderr` | boolean | `true` | Display stderr in the output panel |
+| `outputWindowName` | string | `"Node.js"` | Label for the output panel tab |
+
+### Execution
+
+| Setting | Type | Default | Description |
+|---------|------|---------|-------------|
+| `nodeBin` | string | `"node"` | Path to the Node.js binary (useful for version managers like `nvm`) |
+| `cwd` | string | `"${execPath}"` | Working directory for the process (`${execPath}` = directory of the active file) |
+| `executeFileOrSelection` | string | `"both"` | `"file"` always runs whole file, `"selection"` only runs selection, `"both"` runs selection if present otherwise file |
+| `args` | array\|null | `null` | Arguments passed to the script (e.g. `["--port", "3000"]`) |
+| `options` | array\|null | `null` | Node.js CLI flags prepended to the command (e.g. `["--require", "dotenv/config"]`) |
+| `env` | object\|null | `null` | Extra environment variables for the child process |
+| `includeCode` | string\|null | `null` | Code prepended to every execution (e.g. shared imports or constants) |
+| `tsRunner` | string | `"ts-node"` | Runner for `.ts`/`.tsx` files — `"ts-node"` or `"tsx"` |
+| `terminalMode` | boolean | `false` | Use the integrated terminal instead of the output panel |
+
+### Advanced
+
+| Setting | Type | Default | Description |
+|---------|------|---------|-------------|
+| `legacyMode` | boolean | `false` | Load the legacy v0.2.1 implementation (for users who need backward compatibility) |
+
+---
+
+## Configuration Examples
+
+**Custom Node.js binary** (e.g. a specific version via nvm):
+
+```json
 {
-  "miramac.node.showInfo": true
+  "miramac.node.nodeBin": "/home/user/.nvm/versions/node/v18.0.0/bin/node"
 }
-````
+```
 
-Show stdout and stderr
+**Set environment variables:**
 
-````json
-{
-  "miramac.node.showStdout": true,
-  "miramac.node.showStderr": true
-}
-````
-
-If `miramac.node.legacyMode` is `true` (default) the extention will not use new features and options. Because of some strange problems I can't reproduce, the extension remains in legacy mode. To use the following options simply set this option to `false`
-
-````json
-{
-  "miramac.node.legacyMode": false
-}
-````
-
-### The folloing options need to set the legacyMode off
-
-Set environment variables for execution:
-
-````json
+```json
 {
   "miramac.node.env": {
-      "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "API_KEY": "my-key"
   }
 }
-````
+```
 
-Add arguments for execution:
+**Pass script arguments:**
 
-````json
+```json
 {
   "miramac.node.args": ["--port", "1337"]
 }
-````
-
-Add options for execution:
-
-````json
-{
-  "miramac.node.options": ["--require", "babel-register"]
-}
-````
-
-Change the node binary for execution
-
-````json
-{
-  "miramac.node.nodeBin": "/path/to/some/bin/node-7.0"
-}
-````
-
-Some code that is executed with each run
-
-````json
-{
-  "miramac.node.includeCode": "const DEBUG = true; const fs = require('fs'); "
-}
-````
-
-## How it works
-
-The selected code or if nothing is selected, the active file, is written in a temporarily file (something like `node_<random-sring>.tmp`). You don't have to save the file for execution.
-This file will be executed by your installed version of node.js. Therefore `node` has to be in the PATH.
-
-```javascript
-require('child_process').spawn('node', options,[tmpFile, args])
 ```
 
-Any data from `stdout` or `stderr` will be printed to an OutputChannel. Unfortunately console colors won't work.
+**Use Node.js CLI options** (e.g. load a module before running):
+
+```json
+{
+  "miramac.node.options": ["--require", "dotenv/config"]
+}
+```
+
+**Prepend shared setup code to every run:**
+
+```json
+{
+  "miramac.node.includeCode": "const DEBUG = true; const path = require('path');"
+}
+```
+
+**Run in the integrated terminal** (useful for interactive scripts that read stdin):
+
+```json
+{
+  "miramac.node.terminalMode": true
+}
+```
+
+---
+
+## How It Works
+
+1. When you press `F8`, the extension reads the selected text (or the full file) from the editor buffer.
+2. The code is written to a temporary file (`node_<random>.tmp.js`) in the same directory as your source file — this ensures `__dirname`, `__filename`, and relative `require()` paths all resolve correctly.
+3. Node.js (or `ts-node` for TypeScript) is spawned as a child process pointing at the temp file.
+4. `stdout` and `stderr` are streamed line-by-line to the output panel as they arrive.
+5. The temp file is deleted immediately after the process exits.
+
+> The extension uses `child_process.spawn()` for streaming output and `child_process.spawnSync()` only once per run to resolve the full Node.js binary path.
+
+---
+
+## Troubleshooting
+
+**"Unknown working directory" warning**
+The file has not been saved yet and has no path. Save it once and press F8 again.
+
+**"Process is already running!" error**
+A previous execution is still in progress. Press `F9` to cancel it first.
+
+**TypeScript files don't run**
+Install `ts-node` and `typescript` globally (`npm install -g ts-node typescript`) or set `miramac.node.tsRunner` to `tsx` if you prefer that runner.
+
+**Output appears garbled or ANSI codes are visible**
+ANSI color codes are not rendered in the output panel. Use `terminalMode: true` for color support.
+
+---
 
 > Bugs and feedback: https://github.com/Miramac/vscode-exec-node/issues
 
