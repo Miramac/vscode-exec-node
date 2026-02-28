@@ -10,7 +10,7 @@
   },
   "license": "ISC",
   "engines": {
-    "vscode": "^1.0.0"
+    "vscode": "^1.25.0"
   },
   "icon": "images/node-exec-logo.png",
   "categories": [
@@ -100,7 +100,7 @@
         "miramac.node.outputWindowName": {
           "type": "string",
            "default": "Node.js",
-           "description": "Output-Channel Name"
+           "description": "Name of the terminal tab used for output"
         },
         "miramac.node.env": {
           "type": ["object", "null"],

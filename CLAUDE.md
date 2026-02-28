@@ -213,7 +213,7 @@ The core execution flow in `lib/activate.js`:
 2. Write content to a temp file (`node_<hash>.tmp<ext>`)
 3. Optionally prepend `includeCode`
 4. Spawn Node.js child process with configured binary, options, args, cwd, and env
-5. Stream stdout/stderr to output channel
+5. Stream stdout/stderr to the PTY terminal via `writeEmitter.fire()` (stdout as-is, stderr in red)
 6. Delete temp file in the `close` event callback
 
 Keep temp file cleanup in the `close` event (not `exit`) to ensure it runs after all I/O is flushed.
@@ -244,10 +244,11 @@ Keep temp file cleanup in the `close` event (not `exit`) to ensure it runs after
 
 ## Key VSCode APIs Used
 
-- `vscode.window.createOutputChannel()` — persistent output panel
+- `vscode.window.createTerminal({ pty })` — persistent PTY terminal for streaming output (requires VS Code ≥ 1.25)
+- `vscode.EventEmitter` — fires data to the PTY terminal's `onDidWrite` event
 - `vscode.window.setStatusBarMessage()` — transient status bar feedback
 - `vscode.window.activeTextEditor` — get current open file
-- `vscode.window.createTerminal()` / `onDidCloseTerminal()` — terminal mode support
+- `vscode.window.createTerminal()` / `onDidCloseTerminal()` — legacy `terminalMode: true` support
 - `vscode.commands.registerCommand()` — command registration
 - `vscode.workspace.getConfiguration()` — settings access
 - `vscode.window.showErrorMessage()` / `showWarningMessage()` — user notifications

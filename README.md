@@ -22,9 +22,11 @@ No terminal setup needed. Press `F8` and see the output immediately in the built
 ## Features
 
 - Run the **whole file** or just a **selected snippet** with one keypress
-- Output streams **line-by-line** to the VS Code output panel (no buffering wait)
+- Output streams **line-by-line** to the integrated terminal with full **ANSI color** support
+- `stderr` renders in **red**; info lines render in **dim gray** — visually distinct from program output
+- **Ctrl+C** inside the terminal cancels the process (in addition to `F9`)
 - Supports **TypeScript** files (`.ts`, `.tsx`) via `ts-node` or `tsx` automatically
-- Optional **integrated terminal** mode for interactive scripts
+- Optional **shell terminal** mode for interactive scripts that read stdin
 - Configurable **Node.js binary**, **environment variables**, **CLI arguments**, and **Node options**
 - Prepend **shared setup code** to every execution (e.g. imports, constants)
 - Automatic cleanup — no temp files left behind
@@ -65,7 +67,7 @@ All settings live under the `miramac.node` namespace in your VS Code settings (`
 | `showInfo` | boolean | `true` | Show start time and execution duration |
 | `showStdout` | boolean | `true` | Display stdout in the output panel |
 | `showStderr` | boolean | `true` | Display stderr in the output panel |
-| `outputWindowName` | string | `"Node.js"` | Label for the output panel tab |
+| `outputWindowName` | string | `"Node.js"` | Name of the terminal tab used for output |
 
 ### Execution
 
@@ -134,7 +136,7 @@ All settings live under the `miramac.node` namespace in your VS Code settings (`
 }
 ```
 
-**Run in the integrated terminal** (useful for interactive scripts that read stdin):
+**Run in shell terminal mode** (useful for interactive scripts that read stdin; creates a new terminal tab per run):
 
 ```json
 {
@@ -149,10 +151,10 @@ All settings live under the `miramac.node` namespace in your VS Code settings (`
 1. When you press `F8`, the extension reads the selected text (or the full file) from the editor buffer.
 2. The code is written to a temporary file (`node_<random>.tmp.js`) in the same directory as your source file — this ensures `__dirname`, `__filename`, and relative `require()` paths all resolve correctly.
 3. Node.js (or `ts-node` for TypeScript) is spawned as a child process pointing at the temp file.
-4. `stdout` and `stderr` are streamed line-by-line to the output panel as they arrive.
+4. `stdout` and `stderr` are streamed directly to a persistent PTY terminal in the TERMINAL panel as they arrive, with full ANSI color rendering.
 5. The temp file is deleted immediately after the process exits.
 
-> The extension uses `child_process.spawn()` for streaming output and `child_process.spawnSync()` only once per run to resolve the full Node.js binary path.
+> The extension uses `child_process.spawn()` for streaming and a VS Code pseudoterminal (`Pseudoterminal` API, requires VS Code 1.25+) for output rendering.
 
 ---
 
@@ -168,7 +170,7 @@ A previous execution is still in progress. Press `F9` to cancel it first.
 Install `ts-node` and `typescript` globally (`npm install -g ts-node typescript`) or set `miramac.node.tsRunner` to `tsx` if you prefer that runner.
 
 **Output appears garbled or ANSI codes are visible**
-ANSI color codes are not rendered in the output panel. Use `terminalMode: true` for color support.
+Ensure your VS Code version is 1.25 or newer. The PTY terminal requires that version for the pseudoterminal API.
 
 ---
 
