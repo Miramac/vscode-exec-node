@@ -131,10 +131,12 @@
     }
   },
   "scripts": {
+    "test:unit": "mocha --ui tdd test/utils.test.js",
     "vsce-publish": "vsce publish",
     "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "devDependencies": {
+    "mocha": "^10.0.0",
     "vscode": "^0.11.13"
   }
 }
